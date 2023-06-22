@@ -1,6 +1,7 @@
 // Import the Express module
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
+const cookieParser = require('cookie-parser');
 
 // Set the port number
 const port = process.env.PORT || 8000;
@@ -15,6 +16,7 @@ const db = require('./config/mongoose');
 
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
+app.use(cookieParser());
 
 app.use(expressLayouts);
 app.use(express.static('./public'));

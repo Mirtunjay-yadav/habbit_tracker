@@ -37,6 +37,20 @@ module.exports.register = async (req,res)=>{
         return res.redirect('/login');
     }catch (err) {
         console.log(err);
-        return res.status(500).send(err);
+        return res.status(500).send('Internal Serval Error');
+    }
+}
+
+module.exports.login = async (req,res) => {
+    try{
+        const user = await User.findOne({email : req.body.email})
+        if(!user){
+            return res.status(400).send('User Not Found')
+        }
+        res.cookie('user_id',user.id);
+        return res.status(200).send('Login was Successful');
+    }catch (err) {
+        console.log(err);
+        return res.status(500).send('Internal Server error');
     }
 }

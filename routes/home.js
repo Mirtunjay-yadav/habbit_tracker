@@ -7,5 +7,6 @@ router.get('/',homeController.home);
 router.get('/login',homeController.signIn);
 router.get('/register',homeController.signUp);
 router.post('/register',homeController.register);
+router.post('/login',homeController.login);
 
 module.exports = router;
