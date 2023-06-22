@@ -1,5 +1,6 @@
 // Import the Express module
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 
 // Set the port number
 const port = process.env.PORT || 8000;
@@ -11,6 +12,8 @@ const env = require('dotenv').config();
 
 // Import the Mongoose module for database connection
 const db = require('./config/mongoose');
+
+app.use(expressLayouts);
 
 app.set('view engine','ejs');
 app.set('views','views');
