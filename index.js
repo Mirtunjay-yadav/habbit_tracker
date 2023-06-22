@@ -7,6 +7,11 @@ const port = process.env.PORT || 8000;
 // Create an instance of the Express application
 const app = express();
 
+const env = require('dotenv').config();
+
+// Import the Mongoose module for database connection
+const db = require('./config/mongoose');
+
 // Start the server and listen on the specified port
 app.listen(port,(err)=>{
     if(err){
