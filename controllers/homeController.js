@@ -48,7 +48,7 @@ module.exports.login = async (req,res) => {
             return res.status(400).send('User Not Found')
         }
         res.cookie('user_id',user.id);
-        return res.status(200).send('Login was Successful');
+        return res.status(200).redirect('/habit/home');
     }catch (err) {
         console.log(err);
         return res.status(500).send('Internal Server error');
