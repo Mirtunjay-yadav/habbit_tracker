@@ -12,6 +12,9 @@ const env = require('dotenv').config();
 // Import the Mongoose module for database connection
 const db = require('./config/mongoose');
 
+const homeRouter = require('./routes/home');
+app.use('/',homeRouter);
+
 // Start the server and listen on the specified port
 app.listen(port,(err)=>{
     if(err){
