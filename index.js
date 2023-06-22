@@ -12,6 +12,9 @@ const env = require('dotenv').config();
 // Import the Mongoose module for database connection
 const db = require('./config/mongoose');
 
+app.set('view engine','ejs');
+app.set('views','views');
+
 const homeRouter = require('./routes/home');
 app.use('/',homeRouter);
 
