@@ -9,7 +9,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-    }
+    },
+    habits: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Habit'
+        }
+    ]
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);
