@@ -54,3 +54,13 @@ module.exports.login = async (req,res) => {
         return res.status(500).send('Internal Server error');
     }
 }
+
+module.exports.logout = async (req,res) => {
+    try{
+        res.clearCookie('user_id');
+        return res.redirect('/');
+    }catch (err) {
+        console.log(err);
+        return res.status(500).send('Internal Server error');
+    }
+}
