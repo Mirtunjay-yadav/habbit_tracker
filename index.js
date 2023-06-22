@@ -13,8 +13,14 @@ const env = require('dotenv').config();
 // Import the Mongoose module for database connection
 const db = require('./config/mongoose');
 
-app.use(expressLayouts);
+app.use(express.json());
+app.use(express.urlencoded({extended : true}));
 
+app.use(expressLayouts);
+app.use(express.static('./public'));
+
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 app.set('view engine','ejs');
 app.set('views','views');
 
