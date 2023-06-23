@@ -53,3 +53,23 @@ module.exports.delete = async (req,res) =>{
         return res.status(500).send('Internal Server error');
     }
 }
+
+module.exports.updateStatus = async (req,res)=>{
+    try{
+        const { habitId, status } = req.body;
+        const habit = await Habit.findById(habitId);
+        if(!habit){
+            return res.status(400).send('Habit not found');
+        }
+        const today = new Date().toDateString();
+        const dayToUpdate = habit.days.find((day) => day.date === today );
+        if(dayToUpdate){
+            dayToUpdate.status = status;
+        }
+        await habit.save();
+        return res.status(200).redirect('back');    
+    }catch (err) {
+        console.log(err);
+        return res.status(500).send('Internal Server error');
+    }
+}

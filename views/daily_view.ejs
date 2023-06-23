@@ -15,8 +15,8 @@
                 <p><%= habit.description %></p>
             <%}%>
         </div>
-        <form action="" method="post" class="status-form">
-            <input type="hidden" name="habitId" id="<%= habit._id %>">
+        <form action="/habit/update-status/<%= habit._id %>" method="post" class="status-form">
+            <input type="hidden" name="habitId[]" value="<%= habit._id %>">
             <select name="status" onchange="this.form.submit()">
                 <option value="None" <%= habit.days[0].status === 'None' ? 'selected' : '' %> >None</option>
                 <option value="Done" <%= habit.days[0].status === 'Done' ? 'selected' : '' %> >Done</option>
