@@ -1,5 +1,6 @@
 const User = require('../models/user');
 
+// Handles rendering of the home page
 module.exports.home = async (req, res) => {
     try {
         return res.status(200).render('home', {
@@ -11,6 +12,7 @@ module.exports.home = async (req, res) => {
     }
 }
 
+// Handles rendering of the login page
 module.exports.signIn = (req, res) => {
     if (req.cookies.user_id) {
         return res.redirect('/habit/home');
@@ -18,6 +20,7 @@ module.exports.signIn = (req, res) => {
     return res.render('login', { title: 'Login' })
 }
 
+// Handles rendering of the registration page
 module.exports.signUp = (req, res) => {
     if (req.cookies.user_id) {
         return res.redirect('/habit/home');
@@ -25,6 +28,7 @@ module.exports.signUp = (req, res) => {
     return res.render('Register', { title: 'Register' })
 }
 
+// Handles user registration
 module.exports.register = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
@@ -47,6 +51,7 @@ module.exports.register = async (req, res) => {
     }
 }
 
+// Handles user login
 module.exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email })
@@ -61,6 +66,7 @@ module.exports.login = async (req, res) => {
     }
 }
 
+// Handles user logout
 module.exports.logout = async (req, res) => {
     try {
         res.clearCookie('user_id');

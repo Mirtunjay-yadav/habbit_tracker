@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Habit = require('../models/habit');
 
+// Handles rendering of the home page
 module.exports.home = async (req, res) => {
     try {
         const user = await User.findById(req.cookies.user_id);
@@ -21,6 +22,7 @@ module.exports.home = async (req, res) => {
     }
 }
 
+// Helper function to get an array of dates for the current week
 function getOneWeekDate() {
     let months = ["", "Jan", "Feb", "March", "Apr", "May", "June", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     let dates = [];
@@ -36,6 +38,7 @@ function getOneWeekDate() {
     return dates;
 }
 
+// Handles the creation of a new habit
 module.exports.create = async (req, res) => {
     try {
         const habit = await Habit.create({
@@ -56,6 +59,7 @@ module.exports.create = async (req, res) => {
     }
 };
 
+// Handles the deletion of a habit
 module.exports.delete = async (req, res) => {
     try {
         const habit = await Habit.findById(req.params.id);
@@ -70,6 +74,7 @@ module.exports.delete = async (req, res) => {
     }
 }
 
+// Handles updating the status of a habit
 module.exports.updateStatus = async (req, res) => {
     try {
         const { habitId, status } = req.body;
@@ -90,6 +95,7 @@ module.exports.updateStatus = async (req, res) => {
     }
 }
 
+// Handles toggling the status of a habit
 module.exports.toggleStatus = async (req, res) => {
     try {
         let id = req.query.id;

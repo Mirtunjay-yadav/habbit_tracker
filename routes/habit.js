@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const habitController = require('../controllers/habitController');
 
+// Middleware to check if the user is logged in
 const isLoggedIn = (req, res, next) => {
     if (req.cookies.user_id) {
         next();
