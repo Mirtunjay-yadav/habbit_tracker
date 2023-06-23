@@ -81,7 +81,7 @@ module.exports.updateStatus = async (req, res) => {
         const dayToUpdate = habit.days.find((day) => day.date === today);
         if (dayToUpdate) {
             dayToUpdate.status = status;
-        }wq
+        }
         await habit.save();
         return res.status(200).redirect('back');
     } catch (err) {

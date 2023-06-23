@@ -1,7 +1,8 @@
-// Import the Express module
+// Import the required modules
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
+const env = require('dotenv').config();
 
 // Set the port number
 const port = process.env.PORT || 8000;
@@ -9,23 +10,24 @@ const port = process.env.PORT || 8000;
 // Create an instance of the Express application
 const app = express();
 
-const env = require('dotenv').config();
-
-// Import the Mongoose module for database connection
+// Connect to the database using Mongoose module
 const db = require('./config/mongoose');
 
-app.use(express.json());
-app.use(express.urlencoded({extended : true}));
-app.use(cookieParser());
+app.use(express.json());// Parse JSON request bodies
+app.use(express.urlencoded({extended : true}));// Parse URL-encoded request bodies
+app.use(cookieParser());// Parse cookies
 
-app.use(expressLayouts);
+app.use(expressLayouts);// Enable EJS layouts
+app.set('view engine','ejs');// Set EJS as the view engine
+app.set('views','views');// Set the views directory
+
+// Serve static files from the 'public' directory
 app.use(express.static('./public'));
 
-app.set('layout extractStyles', true);
-app.set('layout extractScripts', true);
-app.set('view engine','ejs');
-app.set('views','views');
+app.set('layout extractStyles', true);// Extract CSS styles
+app.set('layout extractScripts', true);// Extract JavaScript scripts
 
+// Import and use the home router
 const homeRouter = require('./routes/home');
 app.use('/',homeRouter);
 
