@@ -19,4 +19,4 @@
 18) added routes and controllers to update status of habit
 19) made weekly view for all habits and send previous 6 days dates from server
 20) Added toggle the status of habit to weekly view, and we can update status of previous six days.
-21) 
+21) ![ezgif com-optimize](https://github.com/Manohar7730/Habit_Tracker/assets/120391462/27f54b43-8922-4bd8-83bb-fb77fe7063a7)
