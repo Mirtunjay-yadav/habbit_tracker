@@ -35,4 +35,18 @@ module.exports.create = async (req, res) => {
         console.log(err);
         return res.status(500).send('Internal Server error');
     }
+};
+
+module.exports.delete = async (req,res) =>{
+    try{
+        const habit = await Habit.findById(req.params.id);
+        if(!habit){
+            return res.status(400).send('Habit Not Found');
+        }
+        await habit.deleteOne();
+        return res.redirect('back');
+    }catch (err) {
+        console.log(err);
+        return res.status(500).send('Internal Server error');
+    }
 }
