@@ -8,3 +8,39 @@
         <input type="submit" value="Add Habit">
     </div>
 </form>
+
+<%if(locals.user){%>
+    <div id="habit-container">
+        <%if(habits.length===0){%>
+            <p>No Habits Found</p>
+            <%}else{%>
+                <ul>
+                    <%for(habit of habits){%>
+                        <li class="habit-item">
+                            <div class="habit">
+                                <h3 class="habit-name">
+                                    <%= habit.name %>
+                                </h3>
+                                <%if(habit.description){%>
+                                    <p class="habit-description">
+                                        <%= habit.description %>
+                                    </p>
+                                    <%}else{%>
+                                        <p class="no-description">
+                                            No description
+                                        </p>
+                                        <%}%>
+                                            <div class="habit-actions">
+                                                <%for(const day of habit.days){%>
+                                                    <p class="habit-day">
+                                                        <%= day.date %>: <%= day.status %>
+                                                    </p>
+                                                    <%}%>
+                                            </div>
+                            </div>
+                        </li>
+                        <%}%>
+                </ul>
+                <%}%>
+    </div>
+    <%}%>
