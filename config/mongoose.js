@@ -13,4 +13,6 @@ db.once('open',()=>{
     console.log('Connected to db');
 });
 
+mongoose.set('debug', true);
+
 module.exports = db;
