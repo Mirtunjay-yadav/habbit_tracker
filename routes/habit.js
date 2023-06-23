@@ -15,5 +15,6 @@ router.get('/home',isLoggedIn, habitController.home);
 router.post('/create', habitController.create);
 router.get('/delete/:id', habitController.delete);
 router.post('/update-status/:id',habitController.updateStatus);
+router.get('/toggle-status', habitController.toggleStatus);
 
 module.exports = router;
