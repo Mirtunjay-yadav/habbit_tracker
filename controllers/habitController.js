@@ -4,7 +4,10 @@ const Habit = require('../models/habit');
 module.exports.home = async (req, res) => {
     try {
         const user = await User.findById(req.cookies.user_id);
-        const habits = await Habit.find({}).sort({ createdAt: -1 });
+        if (!user) {
+            return res.redirect('/login');
+        }
+        const habits = await Habit.find({user}).sort({ createdAt: -1 });
         return res.status(200).render('homePage', {
             title: "Habit Tracker",
             user: user,
