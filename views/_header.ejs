@@ -1,0 +1,21 @@
+<header>
+    <h1 id="Heading"><a href="/habit/home">
+            Habit Tracker
+        </a></h1>
+    <ul id="control">
+        <%if(locals.user){%>
+            <li>
+                <a href="#">
+                    <%= user.name %>
+                </a>
+            </li>
+            <li>
+                <a href="/logout">Logout</a>
+            </li>
+            <%}else{%>
+                <li>
+                    <p>Welcome</p>
+                </li>
+                <%}%>
+    </ul>
+</header>

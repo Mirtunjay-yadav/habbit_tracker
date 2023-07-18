@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="/css/homePage.css">
+
+<div id="addButton">
+    <button id="open-btn" onclick="openForm()"><i class="fa-solid fa-plus"></i></button>
+</div>
+
+<div id="habit-form-overlay"></div>
+<div id="habit-form">
+    <form action="/habit/create" method="post" id="habit-form-content">
+        <h3>Add New Habit</h3>
+        <input type="text" name="name" id="name" placeholder="Type Your Habit" required autofocus>
+        <input type="text" name="description" id="description" placeholder="Type Some description if needed">
+        <div class="buttons">
+            <input type="submit" value="Cancel" onclick="closeForm()">
+            <input type="submit" value="Add Habit">
+        </div>
+    </form>
+</div>
+
+<div id="view-btn-container">
+    <button id="view-btn" onclick="view()"><i class="fa-solid fa-eye"></i></button>
+</div>
+
+<div id="view-overlay"></div>
+<div id="view">
+    <div id="views">
+        <div id="weekly-view">
+            <%- include('weekly_view'); -%>
+        </div>
+        <div id="daily-view">
+            <%- include('daily_view'); -%>
+        </div>
+        <div id="view-actions">
+            <input type="submit" value="Cancel" onclick="closeView()">
+            <button id="change-view" class="button-30" onclick="changeView()">Show Daily</button>
+        </div>
+    </div>
+</div>
+
+<%if(locals.user){%>
+    <div id="habit-container">
+        <%if(habits.length===0){%>
+            <p>No Habits Found</p>
+            <%}else{%>
+                <ul>
+                    <%for(habit of habits){%>
+                        <li class="habit-item">
+                            <div class="habit">
+                                <h3 class="habit-name">
+                                    <%= habit.name %>
+                                </h3>
+                                <%if(habit.description){%>
+                                    <p class="habit-description">
+                                        <%= habit.description %>
+                                    </p>
+                                    <%}else{%>
+                                        <p class="no-description">
+                                            No description
+                                        </p>
+                                        <%}%>
+                                            <div class="habit-actions">
+                                                <%for(const day of habit.days){%>
+                                                    <p class="habit-day">
+                                                        <%= day.date %>: <%= day.status %>
+                                                    </p>
+                                                    <%}%>
+                                                        <a href="/habit/delete/<%= habit._id %>">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </a>
+                                            </div>
+                            </div>
+                        </li>
+                        <%}%>
+                </ul>
+                <%}%>
+    </div>
+    <%}%>
+
+        <script src="/js/home.js"></script>

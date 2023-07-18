@@ -1,0 +1,33 @@
+<%for(let habit of habits){%>
+    <div class="container daily-view" style="display: none;">
+        <%= habit.name %>
+        <div class="mark-status-daily">
+            <%
+                let months = ["", "Jan", "Feb", "March", "Apr", "May", "June", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+                let startDate = habit.days[0].date;
+            let start = startDate.substring(2);
+            %>
+            <%= start.trim() %>
+        </div>
+        <div class="habit-desc">
+            <%if(!habit.description){%>
+                <p>- No Description -</p>
+            <%}else{%>
+                <p><%= habit.description %></p>
+            <%}%>
+        </div>
+        <form action="/habit/update-status/<%= habit._id %>" method="post" class="status-form">
+            <input type="hidden" name="habitId" value="<%= habit._id %>">
+            <select name="status" onchange="this.form.submit()">
+                <option value="None" <%= habit.days[0].status === 'None' ? 'selected' : '' %> >None</option>
+                <option value="Done" <%= habit.days[0].status === 'Done' ? 'selected' : '' %> >Done</option>
+                <option value="Not done" <%= habit.days[0].status === 'Not done' ? 'selected' : '' %> >Not done</option>
+            </select>
+        </form>
+        <div class="menu">
+            <a href="/habit/delete/<%= habit._id %>">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
+    </div>
+<%}%>

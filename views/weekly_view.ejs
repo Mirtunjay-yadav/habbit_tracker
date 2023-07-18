@@ -1,0 +1,44 @@
+<%for(let habit of habits){%>
+    <div class="container weekly-view">
+        <h2>
+            <%= habit.name %>
+        </h2>
+        <div class="habit-container">
+            <%for(let date of weeklyDates){%>
+                <div class="day-container">
+                    <div class="calendar">
+                        <p>
+                            <%= date %>
+                        </p>
+                    </div>
+                    <% let found=false;
+                        let status='' ;
+                        for(const day of habit.days){
+                            if(day.date===date){
+                                found=true;
+                                status=day.status;
+                                break; } 
+                            } %>
+                            <div>
+                                <a href="/habit/toggle-status/?id=<%= habit._id %>&date=<%= date %>" class="mark-status">
+                                    <% if(found && status === 'Done') { %>
+                                        <i class="fas fa-check-circle" style="color: rgb(130, 189, 107)"></i>
+                                    <% } else if(found && status === 'Not done') { %>
+                                        <i class="fas fa-times-circle" style="color: rgb(241, 121, 109)"></i>
+                                    <% } else { %>
+                                        <i class="fa-solid fa-circle"></i>
+                                    <% } %>
+                                </a>
+                            </div>
+                </div>
+                <%}%>
+                <div class="menu">
+                    <a href="/habit/delete/<%= habit._id %>">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>   
+        </div>
+    </div>
+    
+
+    <%}%>
