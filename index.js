@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const env = require('dotenv').config();
 
 // Set the port number
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 7000;
 
 // Create an instance of the Express application
 const app = express();
